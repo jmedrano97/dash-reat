@@ -5,7 +5,22 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundColor: {
+        'first': '#ec7c6a',
+        'second': '#6c757d',
+        'back1': '#262837',
+        'back2': '#1F1D2B',
+      },
+      textColor: {
+        'txt1': '#e5e7eb',
+        'txt2': '#808183',
+        'first': '#ec7c6a',
+      },
+      borderColor: {
+        'first': '#ec7c6a',
+      },
+    },
   },
   plugins: [],
 }

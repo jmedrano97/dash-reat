@@ -1,13 +1,17 @@
 import { useState } from "react";
 import {
-  RiMenuUnfoldLine,
+  RiMenu3Fill,
   RiUser3Line,
-  RiTeamLine,
-  RiListOrdered,
-  RiMenuFoldLine,
-  RiSearch2Line
+  RiAddLine,
+  RiPieChartLine,
+  RiCloseLine,
+  RiArrowDownSLine,
 } from "react-icons/ri";
-import Sidebar from "./components/shared/Sidebar"
+// Components
+import Sidebar from "./components/shared/Sidebar";
+import Car from "./components/shared/Car";
+import Header from "./components/shared/Header";
+import Card from "./components/shared/Card";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
@@ -15,48 +19,121 @@ function App() {
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
-  }
+    setShowOrder(false);
+  };
+
+  const toggleOrders = () => {
+    setShowOrder(!showOrder);
+    setShowMenu(false);
+  };
+
   return (
     <div className="bg-[#262837] w-full min-h-screen">
       <Sidebar showMenu={showMenu} />
+      <Car showOrder={showOrder} setShowOrder={setShowOrder} />
       {/* Menu movil */}
       <nav className="bg-[#1F1D2B] lg:hidden fixed w-full bottom-0 left-0 text-3xl text-gray-400 py-2 px-8 flex items-center justify-between rounded-tl-xl rounded-tr-xl">
-        <button className="p-2">
-          <RiListOrdered />
-        </button>
         <button className="p-2">
           <RiUser3Line />
         </button>
         <button className="p-2">
-          <RiTeamLine />
+          <RiAddLine />
+        </button>
+        <button onClick={toggleOrders} className="p-2">
+          <RiPieChartLine />
         </button>
         <button onClick={toggleMenu} className="text-white p-2">
-          {showMenu ? <RiMenuFoldLine /> : <RiMenuUnfoldLine />}
+          {showMenu ? <RiCloseLine /> : <RiMenu3Fill />}
         </button>
-
       </nav>
-      <main className="lg:pl-28 grid grid-cols-1 lg:grid-cols-8">
-        <div className="lg:col-span-6">
-          <header className="p-4">
-            <div className="flex flex-col gap-4">
-              <div>
-                <h1 className="text-2xl text-gray-300">Jaime Medrano</h1>
-                <p className="text-gray-500">07 octubre 2023</p>
-              </div>
-              <form>
-                <div className="w-full relative">
-                  <RiSearch2Line className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-300" />
-                  <input type="text" className="bg-[#1F1D2B] w-full py-2 pl-8 pr-4 rounded-lg text-gray-300 outline-none" />
-                </div>
-              </form>
-            </div>
-
-          </header>
+      <main className="lg:pl-32 lg:pr-96 pb-20">
+        <div className="md:p-8 p-4">
+          {/* Header */}
+          <Header />
+          {/* Title content */}
+          <div className="flex items-center justify-between mb-16">
+            <h2 className="text-xl text-gray-300">Choose Dishes</h2>
+            <button className="flex items-center gap-4 text-gray-300 bg-[#1F1D2B] py-2 px-4 rounded-lg">
+              <RiArrowDownSLine /> Dine in
+            </button>
+          </div>
+          {/* Content */}
+          <div className="p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+            {/* Card */}
+            <Card
+              img="comida.png"
+              description="Speacy seasoned seafood nodles"
+              price="2.29"
+              inventory="20"
+            />
+            {/* Card */}
+            <Card
+              img="dish.png"
+              description="Speacy seasoned seafood nodles"
+              price="2.29"
+              inventory="20"
+            />
+            {/* Card */}
+            <Card
+              img="comida.png"
+              description="Speacy seasoned seafood nodles"
+              price="2.29"
+              inventory="20"
+            />
+            {/* Card */}
+            <Card
+              img="dish.png"
+              description="Speacy seasoned seafood nodles"
+              price="2.29"
+              inventory="20"
+            />
+            {/* Card */}
+            <Card
+              img="comida.png"
+              description="Speacy seasoned seafood nodles"
+              price="2.29"
+              inventory="20"
+            />
+            {/* Card */}
+            <Card
+              img="dish.png"
+              description="Speacy seasoned seafood nodles"
+              price="2.29"
+              inventory="20"
+            />
+            {/* Card */}
+            <Card
+              img="comida.png"
+              description="Speacy seasoned seafood nodles"
+              price="2.29"
+              inventory="20"
+            />
+            {/* Card */}
+            <Card
+              img="dish.png"
+              description="Speacy seasoned seafood nodles"
+              price="2.29"
+              inventory="20"
+            />
+            {/* Card */}
+            <Card
+              img="comida.png"
+              description="Speacy seasoned seafood nodles"
+              price="2.29"
+              inventory="20"
+            />
+            {/* Card */}
+            <Card
+              img="dish.png"
+              description="Speacy seasoned seafood nodles"
+              price="2.29"
+              inventory="20"
+            />
+          </div>
         </div>
-        <div className="lg:col-span-2 fixed lg:static right-0">Gola 2</div>
       </main>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
