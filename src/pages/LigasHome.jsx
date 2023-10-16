@@ -14,6 +14,7 @@ import Card from "../components/shared/Card";
 
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 function LigasHome() {
 
@@ -69,9 +70,9 @@ function LigasHome() {
                     {/* Title content */}
                     <div className="flex items-center justify-between mb-16">
                         <h2 className="text-xl text-gray-300">Choose Dishes</h2>
-                        <button className="flex items-center gap-1 text-first bg-[#1F1D2B] py-2 px-4 rounded-lg">
+                        <Link to="/add" className="flex items-center gap-1 text-first bg-[#1F1D2B] py-2 px-4 rounded-lg">
                             <RiBardFill />Crear tu liga
-                        </button>
+                        </Link>
                     </div>
                     {/* Content */}
                     <div className="p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
