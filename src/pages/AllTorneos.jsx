@@ -10,13 +10,13 @@ import {
 import Sidebar from "../components/shared/Sidebar";
 import ComplementMenu from "../components/shared/ComplementMenu";
 import Header from "../components/shared/Header";
-import CardLiga from "../components/shared/CardLiga";
+import CardTorneo from "../components/shared/CardTorneos";
 
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-function AllLigas() {
+function AllTorneos() {
 
     const [showMenu, setShowMenu] = useState(false);
     const [showOrder, setShowOrder] = useState(false);
@@ -46,7 +46,8 @@ function AllLigas() {
 
     return (
         <div className="bg-[#262837] w-full min-h-screen">
-            {/* <ComplementMenu showOrder={showOrder} setShowOrder={setShowOrder} /> */}
+            <Sidebar showMenu={showMenu} />
+            <ComplementMenu showOrder={showOrder} setShowOrder={setShowOrder} />
             {/* Menu movil */}
             <nav className="bg-[#1F1D2B] lg:hidden fixed w-full bottom-0 left-0 text-3xl text-gray-400 py-2 px-8 flex items-center justify-between rounded-tl-xl rounded-tr-xl">
                 <button className="p-2">
@@ -62,21 +63,21 @@ function AllLigas() {
                     {showMenu ? <RiCloseLine /> : <RiMenu3Fill />}
                 </button>
             </nav>
-            <main className="lg:pl-10 lg:pr-10 pb-20">
+            <main className="lg:pl-32 lg:pr-96 pb-20">
                 <div className="md:p-8 p-4">
                     {/* Header */}
                     <Header />
                     {/* Title content */}
                     <div className="flex items-center justify-between mb-16">
-                        <h2 className="text-xl text-gray-300">Selecciona tu liga</h2>
+                        <h2 className="text-xl text-gray-300">Torneos</h2>
                         <Link to="/add" className="flex items-center gap-1 text-first bg-[#1F1D2B] py-2 px-4 rounded-lg">
-                            <RiBardFill />Crear MI LIGA
+                            <RiBardFill />Crear tu liga
                         </Link>
                     </div>
                     {/* Content */}
-                    <div className="p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-16">
+                    <div className="p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
                         {ligas.map((liga) => (
-                            <CardLiga
+                            <CardTorneo
                                 key={liga.id_liga} // Asegúrate de que tu objeto liga tenga una propiedad única como "id"
                                 img="circulo.png" // Asegúrate de que tu objeto liga tenga propiedades img, description, price, e inventory
                                 description={liga.descripcion}
@@ -93,4 +94,4 @@ function AllLigas() {
 
 }
 
-export default AllLigas
+export default AllTorneos

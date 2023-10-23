@@ -1,6 +1,6 @@
 import React from "react";
 
-const CardLiga = (props) => {
+const CardTorneos = (props) => {
   const { img, description, name, link } = props;
 
   return (
@@ -18,5 +18,5 @@ const CardLiga = (props) => {
   );
 };
 
-export default CardLiga;
+export default CardTorneos;
 
