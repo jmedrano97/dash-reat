@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Axios from 'axios'; // Importa Axios
 import { RiMenu3Fill, RiUser3Line, RiAddLine, RiPieChartLine, RiCloseLine } from "react-icons/ri";
 import Sidebar from "../components/shared/Sidebar";
 import ComplementMenu from "../components/shared/ComplementMenu";
@@ -30,18 +31,34 @@ function AddLigaForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Aquí puedes enviar los datos del nuevo liga a tu API o realizar otras acciones necesarias
-        console.log("Nuevo Liga:", newLiga);
-        // Limpia el formulario después de enviar los datos
-        setNewLiga({
-            name: '',
-            description: '',
-            // Restablece otros campos si es necesario
-        });
+
+        // Crea un objeto con los datos del nuevo liga
+        const data = {
+            name: newLiga.name,
+            description: newLiga.description,
+            // Agrega más campos según tus necesidades
+        };
+
+        // Realiza una solicitud POST a tu API para agregar el nuevo liga
+        Axios.post('http://localhost:4000/ligas', data)
+            .then(response => {
+                // Maneja la respuesta de la API (puede ser necesario actualizar tu interfaz)
+                console.log('Respuesta de la API:', response.data);
+                // Limpia el formulario después de enviar los datos
+                setNewLiga({
+                    name: '',
+                    description: '',
+                    // Restablece otros campos si es necesario
+                });
+            })
+            .catch(error => {
+                // Maneja cualquier error que ocurra durante la solicitud a la API
+                console.error('Error al enviar datos a la API:', error);
+            });
     };
 
     return (
-        <div className="bg-[#262837] w-full min-h-screen">
+        <div className="bg-back2 w-full min-h-screen">
             <Sidebar showMenu={showMenu} />
             <ComplementMenu showOrder={showOrder} setShowOrder={setShowOrder} />
 
@@ -62,30 +79,38 @@ function AddLigaForm() {
             </nav>
             <main className="lg:pl-32 lg:pr-96 pb-20">
                 <Header />
-                <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 bg-white shadow-md rounded-md">
+                <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 bg-back1 shadow-md rounded-md text-txt1">
                     <div className="mb-4">
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700">Nombre:</label>
+                        <label htmlFor="name" className="block text-sm font-medium ">Nombre:</label>
                         <input
                             type="text"
                             id="name"
                             name="name"
                             value={newLiga.name}
                             onChange={handleChange}
-                            className="mt-1 p-2 w-full rounded-md border border-gray-300"
+                            className="mt-1 p-2 w-full rounded-lg outline-none border-none bg-back2"
                         />
                     </div>
                     <div className="mb-4">
-                        <label htmlFor="description" className="block text-sm font-medium text-gray-700">Descripción:</label>
+                        <label htmlFor="description" className="block text-sm font-medium text-txt1">Descripción:</label>
                         <textarea
                             id="description"
                             name="description"
                             value={newLiga.description}
                             onChange={handleChange}
-                            className="mt-1 p-2 w-full rounded-md border border-gray-300"
+                            className="mt-1 p-2 w-full rounded-lg outline-none border-none bg-back2"
                         />
                     </div>
                     {/* Agrega más campos según tus necesidades */}
-                    <button type="submit" className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600">
+                    <button type="submit" 
+                    className="bg-back2 
+                    text-first 
+                    py-2 px-4 w-full 
+                    outline 
+                    font-semibold 
+                    rounded-lg 
+                    hover:bg-first 
+                    hover:text-back1">
                         Agregar Liga
                     </button>
                 </form>

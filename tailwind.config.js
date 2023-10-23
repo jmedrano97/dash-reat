@@ -16,6 +16,8 @@ export default {
         'txt1': '#e5e7eb',
         'txt2': '#808183',
         'first': '#ec7c6a',
+        'back1': '#262837',
+        'back2': '#1F1D2B',
       },
       borderColor: {
         'first': '#ec7c6a',
