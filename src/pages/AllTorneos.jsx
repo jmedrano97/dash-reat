@@ -15,6 +15,7 @@ import CardTorneo from "../components/shared/CardTorneos";
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 function AllTorneos() {
 
@@ -29,14 +30,15 @@ function AllTorneos() {
         setShowMenu(false);
     };
 
-    const [ligas, setLigas] = useState([]);
-
+    const [torneos, setTorneos] = useState([]);
+    const { id_liga } = useParams();
+    console.log({id_liga});
     useEffect(() => {
         // Realiza la solicitud a tu API aquí
-        axios.get('http://localhost:4000/ligas')
+        axios.get(`http://localhost:4000/torneos/${id_liga}/torneos`)
             .then((response) => {
                 // Actualiza el estado con los datos de la API
-                setLigas(response.data);
+                setTorneos(response.data);
             })
             .catch((error) => {
                 console.error('Error al obtener datos de la API: ', error);
@@ -75,13 +77,13 @@ function AllTorneos() {
                         </Link>
                     </div>
                     {/* Content */}
-                    <div className="p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
-                        {ligas.map((liga) => (
+                    <div className="p-1 grid grid-cols-1 gap-8">
+                        {torneos.map((torneo) => (
                             <CardTorneo
-                                key={liga.id_liga} // Asegúrate de que tu objeto liga tenga una propiedad única como "id"
-                                img="circulo.png" // Asegúrate de que tu objeto liga tenga propiedades img, description, price, e inventory
-                                description={liga.descripcion}
-                                name={liga.nombre}
+                                key={torneo.id_torneo} // Asegúrate de que tu objeto torneo tenga una propiedad única como "id"
+                                img="circulo.png" // Asegúrate de que tu objeto torneo tenga propiedades img, description, price, e inventory
+                                description={`Liga ${torneo.id_liga}`}
+                                name={torneo.nombre}
                                 link={`/miliga/`}
                             />
                         ))}

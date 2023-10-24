@@ -81,7 +81,7 @@ function AllLigas() {
                                 img="circulo.png" // Asegúrate de que tu objeto liga tenga propiedades img, description, price, e inventory
                                 description={liga.descripcion}
                                 name={liga.nombre}
-                                link={`/miliga/`}
+                                link={`/miliga/${liga.id_liga}/torneos`}
                             />
                         ))}
                     </div>
