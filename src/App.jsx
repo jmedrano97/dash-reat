@@ -10,7 +10,7 @@ function App() {
     <div className='bg-[#262837]'>
       <Routes>
         <Route path="/" element={<AllLigas />} />
-        <Route path="/miliga/:id_liga/torneos" element={<AllTorneos />} />
+        <Route path="/:id_liga/torneos" element={<AllTorneos />} />
         <Route path="/add" element={<AddLigaForm />} />
 
         <Route path="*" element={<NotFound />} />

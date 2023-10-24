@@ -35,7 +35,7 @@ function AllTorneos() {
     console.log({id_liga});
     useEffect(() => {
         // Realiza la solicitud a tu API aquí
-        axios.get(`http://localhost:4000/torneos/${id_liga}/torneos`)
+        axios.get(`http://localhost:4000/api/v1/liga/${id_liga}/torneos`)
             .then((response) => {
                 // Actualiza el estado con los datos de la API
                 setTorneos(response.data);

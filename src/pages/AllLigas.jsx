@@ -33,7 +33,7 @@ function AllLigas() {
 
     useEffect(() => {
         // Realiza la solicitud a tu API aquí
-        axios.get('http://localhost:4000/ligas')
+        axios.get('http://localhost:4000/api/v1/ligas')
             .then((response) => {
                 // Actualiza el estado con los datos de la API
                 setLigas(response.data);
@@ -81,7 +81,7 @@ function AllLigas() {
                                 img="circulo.png" // Asegúrate de que tu objeto liga tenga propiedades img, description, price, e inventory
                                 description={liga.descripcion}
                                 name={liga.nombre}
-                                link={`/miliga/${liga.id_liga}/torneos`}
+                                link={`/${liga.id_liga}/torneos`}
                             />
                         ))}
                     </div>
