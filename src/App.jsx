@@ -4,6 +4,7 @@ import LigasHome from './pages/LigasHome'
 import AddLigaForm from './pages/AddLigaForm'
 import AllLigas from './pages/AllLigas'
 import MiLiga from './pages/MiLiga'
+import MiTorneo from './pages/MiTorneo'
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<AllLigas />} />
         <Route path="/:id_liga/liga" element={<MiLiga />} />
+        <Route path="/:id_torneo/torneo" element={<MiTorneo />} />
         <Route path="/add" element={<AddLigaForm />} />
 
         <Route path="*" element={<NotFound />} />
