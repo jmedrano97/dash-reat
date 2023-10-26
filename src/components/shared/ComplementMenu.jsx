@@ -2,7 +2,8 @@ import React from "react";
 import { RiCloseLine, RiDeleteBin6Line } from "react-icons/ri";
 
 const ComplementMenu = (props) => {
-  const { showOrder, setShowOrder } = props;
+  const { showOrder, setShowOrder, ligaDetails } = props;
+  console.log({ligaDetails});
   return (
     <div
       className={`lg:col-span-2 fixed top-0 bg-[#1F1D2B] w-full lg:w-96 lg:right-0 h-full transition-all z-50 ${
@@ -15,8 +16,11 @@ const ComplementMenu = (props) => {
           onClick={() => setShowOrder(false)}
           className="lg:hidden absolute left-4 top-4 p-3 box-content text-gray-300 bg-[#262837] rounded-full text-xl"
         />
-        <h1 className="text-2xl my-4">Complement Menu</h1>
+        <h1 className="text-2xl my-4">{ligaDetails.nombre}</h1>
         {/* Pills */}
+        <div className="flex items-center gap-4 flex-wrap mb-8">
+          <p>{ligaDetails.descripcion}</p>
+        </div>
         <div className="flex items-center gap-4 flex-wrap mb-8">
           <button className="bg-[#ec7c6a] text-white py-2 px-4 rounded-xl">
             Button 1

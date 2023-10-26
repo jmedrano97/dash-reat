@@ -17,7 +17,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
-function AllTorneos() {
+function MiLiga() {
 
     const [showMenu, setShowMenu] = useState(false);
     const [showOrder, setShowOrder] = useState(false);
@@ -30,10 +30,20 @@ function AllTorneos() {
         setShowMenu(false);
     };
 
+    const [ligaDetails, setLigaDetails] = useState(""); // Nuevo estado para el nombre de la liga
+    console.log(ligaDetails);
     const [torneos, setTorneos] = useState([]);
     const { id_liga } = useParams();
-    console.log({id_liga});
     useEffect(() => {
+        // Realiza la solicitud a tu API para obtener el nombre de la liga
+        axios.get(`http://localhost:4000/api/v1/liga/${id_liga}`)
+            .then((response) => {
+                setLigaDetails(response.data); // Asume que la propiedad "name" contiene el nombre de la liga
+            })
+            .catch((error) => {
+                console.error('Error al obtener el nombre de la liga: ', error);
+            });
+
         // Realiza la solicitud a tu API aquí
         axios.get(`http://localhost:4000/api/v1/liga/${id_liga}/torneos`)
             .then((response) => {
@@ -49,7 +59,7 @@ function AllTorneos() {
     return (
         <div className="bg-[#262837] w-full min-h-screen">
             <Sidebar showMenu={showMenu} />
-            <ComplementMenu showOrder={showOrder} setShowOrder={setShowOrder} />
+            <ComplementMenu showOrder={showOrder} setShowOrder={setShowOrder} ligaDetails={ligaDetails} />
             {/* Menu movil */}
             <nav className="bg-[#1F1D2B] lg:hidden fixed w-full bottom-0 left-0 text-3xl text-gray-400 py-2 px-8 flex items-center justify-between rounded-tl-xl rounded-tr-xl">
                 <button className="p-2">
@@ -96,4 +106,4 @@ function AllTorneos() {
 
 }
 
-export default AllTorneos
+export default MiLiga
