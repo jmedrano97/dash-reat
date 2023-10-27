@@ -7,7 +7,7 @@ import {
     RiBardFill,
 } from "react-icons/ri";
 // Components
-import Sidebar from "../components/shared/Sidebar";
+import SidebarTorneo from "../components/shared/SidebarTorneo";
 import ComplementMenu from "../components/shared/ComplementMenu";
 import Header from "../components/shared/Header";
 import CardTorneo from "../components/shared/CardTorneos";
@@ -17,7 +17,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
-function MiLiga() {
+function MisEquipos() {
 
     const [showMenu, setShowMenu] = useState(false);
     const [showOrder, setShowOrder] = useState(false);
@@ -30,36 +30,25 @@ function MiLiga() {
         setShowMenu(false);
     };
 
-    const [ligaDetails, setLigaDetails] = useState(""); // Nuevo estado para el nombre de la liga
-    console.log(ligaDetails);
-    const [torneos, setTorneos] = useState([]);
-    const { id_liga } = useParams();
+    const [torneoDetails, setTorneoDetails] = useState(""); // Nuevo estado para el nombre de la liga
+    console.log(torneoDetails);
+    const { id_torneo } = useParams();
     useEffect(() => {
-        // Realiza la solicitud a tu API para obtener el nombre de la liga
-        axios.get(`http://localhost:4000/api/v1/liga/${id_liga}`)
+        axios.get(`http://localhost:4000/api/v1/torneo/${id_torneo}`)
             .then((response) => {
-                setLigaDetails(response.data); // Asume que la propiedad "name" contiene el nombre de la liga
+                setTorneoDetails(response.data);
             })
             .catch((error) => {
                 console.error('Error al obtener el nombre de la liga: ', error);
             });
 
-        // Realiza la solicitud a tu API aquí
-        axios.get(`http://localhost:4000/api/v1/liga/${id_liga}/torneos`)
-            .then((response) => {
-                // Actualiza el estado con los datos de la API
-                setTorneos(response.data);
-            })
-            .catch((error) => {
-                console.error('Error al obtener datos de la API: ', error);
-            });
     }, []); // El segundo argumento vacío [] asegura que useEffect se ejecute solo una vez al montar el componente
 
 
     return (
         <div className="bg-[#262837] w-full min-h-screen">
-            <Sidebar showMenu={showMenu} />
-            <ComplementMenu showOrder={showOrder} setShowOrder={setShowOrder} ligaDetails={ligaDetails} />
+            <SidebarTorneo showMenu={showMenu} />
+            <ComplementMenu showOrder={showOrder} setShowOrder={setShowOrder} ligaDetails={torneoDetails} />
             {/* Menu movil */}
             <nav className="bg-[#1F1D2B] lg:hidden fixed w-full bottom-0 left-0 text-3xl text-gray-400 py-2 px-8 flex items-center justify-between rounded-tl-xl rounded-tr-xl">
                 <button className="p-2">
@@ -81,23 +70,13 @@ function MiLiga() {
                     <Header />
                     {/* Title content */}
                     <div className="flex items-center justify-between mb-16">
-                        <h2 className="text-xl text-gray-300">Torneos</h2>
+                        <h2 className="text-xl text-gray-300">Equipossss</h2>
                         <Link to="/add" className="flex items-center gap-1 text-first bg-[#1F1D2B] py-2 px-4 rounded-lg">
                             <RiBardFill />Crear tu liga
                         </Link>
                     </div>
                     {/* Content */}
-                    <div className="p-1 grid grid-cols-1 gap-8">
-                        {torneos.map((torneo) => (
-                            <CardTorneo
-                                key={torneo.id_torneo} // Asegúrate de que tu objeto torneo tenga una propiedad única como "id"
-                                img="circulo.png" // Asegúrate de que tu objeto torneo tenga propiedades img, description, price, e inventory
-                                description={`Liga ${torneo.id_liga}`}
-                                name={torneo.nombre}
-                                link={`/${torneo.id_torneo}/torneo`}
-                            />
-                        ))}
-                    </div>
+
 
                 </div>
             </main>
@@ -106,4 +85,4 @@ function MiLiga() {
 
 }
 
-export default MiLiga
+export default MisEquipos
